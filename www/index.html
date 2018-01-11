@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Jelentkezések</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<center>
+			<textarea name="Text1" cols="40" rows="5" id="textArea"></textarea> <br>
+			<button id="submitButton">Küldés</button>
+		</center>
+		<script>
+			serverIP = "http://localhost:1111"
+			$.ajax({
+        			type: "get",
+        			url: serverIP + "/leker",
+        			success: function(responseData, textStatus, jqXHR) {
+            				document.getElementById("textArea").value = JSON.parse(responseData).data;
+            				console.log('textArea szövege: ' + '\n' + responseData + '\n -----');
+        			},
+        			error: function(jqXHR, textStatus, errorThrown) {
+					alert("Hiba lépett fel a táblázat lekérésekor");
+				}
+    			});
+			
+			document.getElementById("submitButton").onclick = function() {
+			
+			var sengingJSON = {
+				"data": document.getElementById("textArea").value
+			}
+				$.ajax({
+					type: "post",
+					url: serverIP + "/bekuld",
+					data: JSON.stringify(sengingJSON),
+					contentType: "application/json, charset=utf-8",
+					dataType:"json",
+					success: function(responseData, textStatus, jqXHR) {
+						alert("Sikeres változtatás");
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						alert("Hiba történt a szerkeztés feldolgozása közben")
+					}
+				});
+			}
+		</script>
+	</body>
+</html>
