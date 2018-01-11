@@ -26,13 +26,13 @@
 			
 			document.getElementById("submitButton").onclick = function() {
 			
-			var sengingJSON = {
+			var sendingJSON = {
 				"data": document.getElementById("textArea").value
 			}
 				$.ajax({
 					type: "post",
 					url: serverIP + "/bekuld",
-					data: JSON.stringify(sengingJSON),
+					data: JSON.stringify(sendingJSON),
 					contentType: "application/json, charset=utf-8",
 					dataType:"json",
 					success: function(responseData, textStatus, jqXHR) {

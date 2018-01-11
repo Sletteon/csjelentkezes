@@ -1,15 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-#	######################################
-#	cm-kapcsolatteszt szerveroldali szkript
-#
-# 	Flask ügye, ha ez a gép egy kérést kap, akkor futtassa le az index() függvényt.
-# 	Amennyiben GET metódussal csatlakoztak kliensek erre a szerverre,
-#	lekérnek adatot, így a POST metódussal beküldött adatokat,
-#	JSON formában visszaszolgálja.
-#	######################################
-
 # [+] Hiba nélkül történt valami (zöld)
 # [-] Semmi extra (kék)
 # [*] Nem végzetes hiba (sárga)
