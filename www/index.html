@@ -11,7 +11,7 @@
 			<button id="submitButton">Küldés</button>
 		</center>
 		<script>
-			serverIP = "http://localhost:1111"
+			serverIP = document.location.origin + ":1111"
 			$.ajax({
         			type: "get",
         			url: serverIP + "/leker",
