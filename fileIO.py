@@ -4,10 +4,13 @@
 import json
 
 class fileIO:
-	# JSON adatok mentése
 	def writeJSONToFile(self, file, JSON):
 		with open(file, 'w', encoding='utf-8') as fileobj:
 			fileobj.truncate()
+			json.dump(JSON, fileobj, ensure_ascii=False)
+
+	def appendJSONToFile(self, file, JSON):
+		with open(file, 'w', encoding='utf-8') as fileobj:
 			json.dump(JSON, fileobj, ensure_ascii=False)
 
 	def readJSONFormFile(self, file):

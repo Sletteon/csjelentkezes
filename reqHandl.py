@@ -39,3 +39,23 @@ class onReceiveReq(fileIO, errorHandl):
 			return Response(json.dumps({'ERROR': 'ERROR READING RECEIVED MESSAGE'}), status=400, mimetype='application/json')
 
 		return Response(json.dumps('SUCCESS'), mimetype='application/json')
+	
+	def onReceiveReg(self, clientIP):
+		gotJSON = request.get_json()
+		colorPrint().finePrint('Regisztráció: %s' %(clientIP))
+		
+		try:
+			self.appendJSONToFile('data/data.json', gotJSON)
+
+		except KeyError:
+			errorHandl().errorHandling(clientIP)
+			return Response(json.dumps({'ERROR': 'JSON ERROR'}), status=422, mimetype='application/json')
+
+		except TypeError:
+			errObj.errorHandling(clientIP)
+			return Response(json.dumps({'ERROR': 'ERROR READING RECEIVED MESSAGE'}), status=400, mimetype='application/json')
+
+		return Response(json.dumps('SUCCESS'), mimetype='application/json')
+
+
+

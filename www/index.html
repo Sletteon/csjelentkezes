@@ -11,7 +11,7 @@
 			<button id="submitButton">Küldés</button>
 		</center>
 		<script>
-			serverIP = document.location.origin + ":1111"
+			serverIP = "http://" + document.location.host;
 			$.ajax({
         			type: "get",
         			url: serverIP + "/leker",
@@ -28,7 +28,7 @@
 			
 			var sendingJSON = {
 				"data": document.getElementById("textArea").value
-			}
+			};
 				$.ajax({
 					type: "post",
 					url: serverIP + "/bekuld",

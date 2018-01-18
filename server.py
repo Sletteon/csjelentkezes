@@ -55,6 +55,11 @@ def bekuld():
         clientIP = request.remote_addr
         return onReceiveReq().onReceiveChange(clientIP)
 
+@app.route('/regisztral', methods=['POST'])
+def regisztral():
+	clientIP = request.remote_addr
+	return onReceiveReq().onReceiveReg(clientIP)
+
 # Lokális Ip-t (hálózaton belülit) ad vissza
 # Ha nem vagyunk online, OSError-t dob fel
 def getlocalIp():
