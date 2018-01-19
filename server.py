@@ -45,12 +45,12 @@ def index():
 	clientIP = request.remote_addr
 	return onReceiveReq().onReceivePageGet(clientIP)
 
-@app.route('/leker', methods=['GET'])
+@app.route('/62e633c0dfefac0bfca4a0d19857230d1ba960a0', methods=['GET'])
 def lekeres():
         clientIP = request.remote_addr
         return onReceiveReq().onReceiveGet(clientIP)
 
-@app.route('/bekuld', methods=['POST'])
+@app.route('/e122d130ddc1f8b152fb9301a08adb2f3e3d8bcc', methods=['POST'])
 def bekuld():
         clientIP = request.remote_addr
         return onReceiveReq().onReceiveChange(clientIP)

@@ -14,7 +14,7 @@
 			serverIP = "http://" + document.location.host;
 			$.ajax({
         			type: "get",
-        			url: serverIP + "/leker",
+        			url: serverIP + "/62e633c0dfefac0bfca4a0d19857230d1ba960a0",
         			success: function(responseData, textStatus, jqXHR) {
             				document.getElementById("textArea").value = JSON.parse(responseData).data;
             				console.log('textArea szövege: ' + '\n' + responseData + '\n -----');
@@ -31,7 +31,7 @@
 			};
 				$.ajax({
 					type: "post",
-					url: serverIP + "/bekuld",
+					url: serverIP + "/e122d130ddc1f8b152fb9301a08adb2f3e3d8bcc",
 					data: JSON.stringify(sendingJSON),
 					contentType: "application/json, charset=utf-8",
 					dataType:"json",
