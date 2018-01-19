@@ -21,3 +21,9 @@ class fileIO:
 		with open('debug/data.json', 'w', encoding='utf-8') as file:
 			file.truncate()
 			file.close()
+
+	def checkIfPassExists(self, passw):
+                with open('data/passwords.list', 'r', encoding='utf-8') as file:
+                        for line in file:
+                                if str(passw) in line:
+                                        return True

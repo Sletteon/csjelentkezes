@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Belépés</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<center>
+			<p>Jelszó:</p>
+			<textarea name="Text1" cols="40" rows="1" id="textArea"></textarea> <br>
+			<button id="submitButton">Küldés</button>
+		</center>
+		<script>
+			serverIP = "http://" + document.location.host;
+			
+			
+			document.getElementById("submitButton").onclick = function() {
+			
+				$.ajax({
+					type: "get",
+					url: serverIP + "/jelszo/" + document.getElementById("textArea").value,
+					success: function(responseData, textStatus, jqXHR) {
+						document.open('text/html');
+						document.write(responseData);
+						document.close();
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						alert("Szerver nem online")
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

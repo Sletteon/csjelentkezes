@@ -1,2 +1,3 @@
-﻿# Üres mappa
-**Ide fognak majd megjelenni a tárolt adatok egy data.json fájlban**
+﻿# Adat mappa
+**A passwords.list fájlba kell a jelszavak listáját beírni.** <br>
+**Data.json fájlba jelennek meg az adatok.**

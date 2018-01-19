@@ -13,10 +13,7 @@ from colorPrint import colorPrint
 class onReceiveReq(fileIO, errorHandl):
 	def onReceivePageGet(self, clientIP):
 		printObj = colorPrint()
-		# [*] Anyaglekérés: jancsi.ip.címe.túróstáska
-
-		printObj.finePrint('Weboldallekérés: %s' %(clientIP))
-		return send_from_directory('www', 'index.html')
+		return send_from_directory('www', 'pass.html')
 
 	def onReceiveGet(self, clientIP):
                 # colorPrint().finePrint('Adatlekérés: %s' %(clientIP))
@@ -57,5 +54,13 @@ class onReceiveReq(fileIO, errorHandl):
 
 		return Response(json.dumps('SUCCESS'), mimetype='application/json')
 
+	def onReceivePass(self, clientIP, passw):
+                gotJSON = request.get_json()
+                if fileIO().checkIfPassExists(passw) == True:
+                        colorPrint().okPrint('Sikeres bejelentkezés: %s' %(clientIP))
+                        return send_from_directory('www', 'index.html')
+                else:
+                        colorPrint().warnPrint('Hibás próbálkozás: %s' %(clientIP))
+                        return Response(json.dumps('Téves jelszó'), mimetype='application/json')
 
 

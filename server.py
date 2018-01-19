@@ -60,6 +60,11 @@ def regisztral():
 	clientIP = request.remote_addr
 	return onReceiveReq().onReceiveReg(clientIP)
 
+@app.route('/jelszo/<passw>', methods=['GET'])
+def jelszo(passw):
+        clientIP = request.remote_addr
+        return onReceiveReq().onReceivePass(clientIP, passw)
+
 # Lokális Ip-t (hálózaton belülit) ad vissza
 # Ha nem vagyunk online, OSError-t dob fel
 def getlocalIp():
