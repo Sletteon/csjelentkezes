@@ -13,7 +13,7 @@ from colorPrint import colorPrint
 class onReceiveReq(fileIO, errorHandl):
 	def onReceivePageGet(self, clientIP):
 		printObj = colorPrint()
-		return send_from_directory('www', 'pass.html')
+		return send_from_directory('www', 'index.html')
 
 	def onReceiveGet(self, clientIP):
                 # colorPrint().finePrint('Adatlekérés: %s' %(clientIP))
@@ -36,6 +36,17 @@ class onReceiveReq(fileIO, errorHandl):
 			return Response(json.dumps({'ERROR': 'ERROR READING RECEIVED MESSAGE'}), status=400, mimetype='application/json')
 
 		return Response(json.dumps('SUCCESS'), mimetype='application/json')
+	
+	def onReceiveChangeGET(self, clientIP, email):
+		colorPrint().finePrint('Adat lekérése %s e-mail címen: %s' %(email, clientIP))
+		return fileIO().readDataFromFile('data/data.txt', email)
+
+	def onReceiveChangePOST(self, clientIP, email):
+		gotJSON = request.get_json()
+		colorPrint().finePrint('Adatváltoztatás %s e-mail címen: %s' %(email, clientIP))
+		fileIO().setDataToFile('data/data.txt', email, gotJSON)
+		return Response(json.dumps('Sikeres változtatás'), mimetype='application/json')
+
 	
 	def onReceiveReg(self, clientIP):
 		gotJSON = request.get_json()

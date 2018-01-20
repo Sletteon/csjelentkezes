@@ -65,6 +65,15 @@ def jelszo(passw):
         clientIP = request.remote_addr
         return onReceiveReq().onReceivePass(clientIP, passw)
 
+@app.route('/valtoztat/<email>', methods=['GET', 'POST'])
+def valtoztat(email):
+	clientIP = request.remote_addr
+	if request.method == 'GET':
+		return onReceiveReq().onReceiveChangeGET(clientIP, email)
+	else:
+		return onReceiveReq().onReceiveChangePOST(clientIP, email)
+
+
 # Lokális Ip-t (hálózaton belülit) ad vissza
 # Ha nem vagyunk online, OSError-t dob fel
 def getlocalIp():

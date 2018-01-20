@@ -7,31 +7,33 @@
 	</head>
 	<body>
 		<center>
+			<input type="email" id="emailArea" placeholder="Szülő email címe"/>
+			<button id="getButton">Adatok lekérése</button> <br>
 			<textarea name="Text1" cols="40" rows="5" id="textArea"></textarea> <br>
 			<button id="submitButton">Küldés</button>
 		</center>
 		<script>
 			serverIP = "http://" + document.location.host;
-			$.ajax({
-        			type: "get",
-        			url: serverIP + "/62e633c0dfefac0bfca4a0d19857230d1ba960a0",
-        			success: function(responseData, textStatus, jqXHR) {
-            				document.getElementById("textArea").value = JSON.parse(responseData).data;
-            				console.log('textArea szövege: ' + '\n' + responseData + '\n -----');
-        			},
-        			error: function(jqXHR, textStatus, errorThrown) {
-					alert("Hiba lépett fel a táblázat lekérésekor");
-				}
-    			});
-			
-			document.getElementById("submitButton").onclick = function() {
-			
-			var sendingJSON = {
-				"data": document.getElementById("textArea").value
-			};
+
+			document.getElementById("getButton").onclick = function() {
+				$.ajax({
+        				type: "get",
+        				url: serverIP + "/valtoztat/" + document.getElementById("emailArea").value,
+        				success: function(responseData, textStatus, jqXHR) {
+            					document.getElementById("textArea").value = responseData;
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						alert("Hiba történt az adat lekérése során");
+					}
+				});
+			}
+			document.getElementById("submitButton").onclick = function() {	
+				var sendingJSON = {
+					"data": '"' + document.getElementById("textArea").value + '"'
+				};
 				$.ajax({
 					type: "post",
-					url: serverIP + "/e122d130ddc1f8b152fb9301a08adb2f3e3d8bcc",
+					url: serverIP + "/valtoztat/" + document.getElementById("emailArea").value,
 					data: JSON.stringify(sendingJSON),
 					contentType: "application/json, charset=utf-8",
 					dataType:"json",
