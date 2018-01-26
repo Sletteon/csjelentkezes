@@ -45,26 +45,6 @@ def index():
 	clientIP = request.remote_addr
 	return onReceiveReq().onReceivePageGet(clientIP)
 
-@app.route('/62e633c0dfefac0bfca4a0d19857230d1ba960a0', methods=['GET'])
-def lekeres():
-        clientIP = request.remote_addr
-        return onReceiveReq().onReceiveGet(clientIP)
-
-@app.route('/e122d130ddc1f8b152fb9301a08adb2f3e3d8bcc', methods=['POST'])
-def bekuld():
-        clientIP = request.remote_addr
-        return onReceiveReq().onReceiveChange(clientIP)
-
-@app.route('/regisztral', methods=['POST'])
-def regisztral():
-	clientIP = request.remote_addr
-	return onReceiveReq().onReceiveReg(clientIP)
-
-@app.route('/jelszo/<passw>', methods=['GET'])
-def jelszo(passw):
-        clientIP = request.remote_addr
-        return onReceiveReq().onReceivePass(clientIP, passw)
-
 @app.route('/valtoztat/<email>', methods=['GET', 'POST'])
 def valtoztat(email):
 	clientIP = request.remote_addr
@@ -72,7 +52,6 @@ def valtoztat(email):
 		return onReceiveReq().onReceiveChangeGET(clientIP, email)
 	else:
 		return onReceiveReq().onReceiveChangePOST(clientIP, email)
-
 
 # Lokális Ip-t (hálózaton belülit) ad vissza
 # Ha nem vagyunk online, OSError-t dob fel
