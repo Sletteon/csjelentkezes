@@ -3,29 +3,12 @@
 
 *Függőségek (szerver) :*
 
-flask flask_cors
+``
+flask flask_cors pymysql
+``
 <hr>
 
-*Egyéb:*
+*Telepítés (szintén szerver):*
 
-Adatküldés (serverIP változó érték, definiálni kell):
-
-```javascript
-var sendingJSON = {
-		"data": document.getElementById("textArea").value
-}
-      
-$.ajax({
-		type: "post",
-		url: serverIP + "/bekuld",
-		data: JSON.stringify(sendingJSON),
-		contentType: "application/json, charset=utf-8",
-		dataType:"json",
-		success: function(responseData, textStatus, jqXHR) {
-			alert("Sikeres változtatás");
-		},
-		error: function(jqXHR, textStatus, errorThrown) {
-			alert("Hiba történt a szerkeztés feldolgozása közben")
-		}
-});
-```
+**Mysql-adatbázis IP-címét (vagy hostname-jét) a DBIp.txt fájlba kell beírni, az első sorba.**<br>
+Mysql portja: ``3306``
