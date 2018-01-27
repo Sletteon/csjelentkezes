@@ -2,8 +2,13 @@
 
 # Elküldi/lekéri az adatokat egy külső adatbázisba (mysql)
 import json, pymysql, pymysql.cursors
+from colorPrint import colorPrint
 
 class dbIO:
+	def getdbIp(self):
+		with open('DBIp.txt', 'r') as file:
+			return file.readline()
+
 	def executeQuery(self, dbIp, query):
 
 		conn = pymysql.connect(
@@ -16,8 +21,15 @@ class dbIO:
 		)
 		curs = conn.cursor()
 		curs.execute(query)
+		conn.commit()
 
 		return curs.fetchall()
 
 	def searchAndReturnColumn(self, dbIp, email):
-		return self.executeQuery(dbIp, 'SELECT * FROM `jelentkezok` WHERE `csvLines` LIKE "%' + email + '%"')[0]
+		try:
+			return self.executeQuery(dbIp, 'SELECT csvLines FROM `jelentkezok` WHERE `csvLines` LIKE "%' + email + '%"')[0]
+		except IndexError:
+			return 'Nincs adat az adatbázisban'
+
+	def updateWithJSON(self, dbIp, email, changeTo):
+		self.executeQuery(dbIp, 'UPDATE `jelentkezok` SET csvLines = "' + changeTo + '" WHERE csvLines LIKE "%' + email + '%"')

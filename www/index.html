@@ -19,17 +19,19 @@
 				$.ajax({
         				type: "get",
         				url: serverIP + "/valtoztat/" + document.getElementById("emailArea").value,
+						dataType: 'json',
         				success: function(responseData, textStatus, jqXHR) {
-            					document.getElementById("textArea").value = responseData;
+							document.getElementById("textArea").value = responseData.data;
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
-						alert("Hiba történt az adat lekérése során");
+						alert(jqXHR + textStatus + errorThrown);
 					}
 				});
 			}
-			document.getElementById("submitButton").onclick = function() {	
+			document.getElementById("submitButton").onclick = function() {
 				var sendingJSON = {
-					"data": '"' + document.getElementById("textArea").value + '"'
+					"data": document.getElementById("textArea").value
+					//"email": '"' + document.getElementById("emailArea").value + '"'
 				};
 				$.ajax({
 					type: "post",
@@ -41,7 +43,8 @@
 						alert("Sikeres változtatás");
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
-						alert("Hiba történt a szerkeztés feldolgozása közben")
+						alert("Hiba történt a szerkeztés feldolgozása közben");
+						console.log(JSON.stringify(sendingJSON))
 					}
 				});
 			}
