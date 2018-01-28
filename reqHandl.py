@@ -22,7 +22,6 @@ class onReceiveReq(fileIO, errorHandl, dbIO):
 		if email is '%':
 			return Response(json.dumps({'data':'Biztonsági okokból a % le van tiltva'}))
 		colorPrint().finePrint('Adat lekérése %s e-mail címen: %s' %(email, clientIP))
-		# return fileIO().readDataFromFile('data/data.txt', email)
 		return Response(json.dumps({'data':self.searchAndReturnColumn(self.getdbIp(), email)}), mimetype='application/json')
 
 	def onReceiveChangePOST(self, clientIP, email):
