@@ -14,7 +14,6 @@ from flask import Flask, request, Response
 from flask_cors import CORS
 
 # Saját osztáyok
-from fileIO import fileIO
 from reqHandl import onReceiveReq
 from colorPrint import colorPrint
 from errorHandl import errorHandl

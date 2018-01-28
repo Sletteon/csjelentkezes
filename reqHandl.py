@@ -6,7 +6,6 @@ import socket, os
 from flask import Flask, request, Response, json, send_from_directory
 from flask_cors import CORS
 
-from fileIO import fileIO
 from errorHandl import errorHandl
 from colorPrint import colorPrint
 from dbIO import dbIO
