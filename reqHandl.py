@@ -10,7 +10,7 @@ from errorHandl import errorHandl
 from colorPrint import colorPrint
 from dbIO import dbIO
 
-class onReceiveReq(fileIO, errorHandl, dbIO):
+class onReceiveReq(errorHandl, dbIO):
 
 
 	def onReceivePageGet(self, clientIP):
