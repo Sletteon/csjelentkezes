@@ -18,9 +18,9 @@ class onReceiveReq(errorHandl, dbIO):
 		return send_from_directory('www', 'index.html')
 
 	def onReceiveChangeGET(self, clientIP, email):
-		if email is '%':
+		if '%' in email:
 			return Response(json.dumps({'data':'Biztonsági okokból a "%" le van tiltva'}))
-		if "@" not in email:
+		if '@' not in email:
 			return Response(json.dumps({'data':'Nem érvényes e-mail cím'}))
 		colorPrint().finePrint('Adat lekérése |%s| e-mail címen: %s' %(email, clientIP))
 		return Response(json.dumps({'data':self.searchAndReturnColumn(self.getdbIp(), email)}), mimetype='application/json')
