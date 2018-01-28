@@ -19,13 +19,14 @@ class onReceiveReq(errorHandl, dbIO):
 
 	def onReceiveChangeGET(self, clientIP, email):
 		if email is '%':
-			return Response(json.dumps({'data':'Biztonsági okokból a % le van tiltva'}))
-		colorPrint().finePrint('Adat lekérése %s e-mail címen: %s' %(email, clientIP))
+			return Response(json.dumps({'data':'Biztonsági okokból a "%" le van tiltva'}))
+		if "@" not in email:
+			return Response(json.dumps({'data':'Nem érvényes e-mail cím'}))
+		colorPrint().finePrint('Adat lekérése |%s| e-mail címen: %s' %(email, clientIP))
 		return Response(json.dumps({'data':self.searchAndReturnColumn(self.getdbIp(), email)}), mimetype='application/json')
 
 	def onReceiveChangePOST(self, clientIP, email):
 		gotJSON = request.get_json()
-		colorPrint().finePrint('Adatváltoztatás %s e-mail címen: %s' %(email, clientIP))
-		colorPrint().finePrint(str(json.dumps(gotJSON)))
+		colorPrint().finePrint('Adatváltoztatás |%s| e-mail címen: %s' %(email, clientIP))
 		self.updateWithJSON(self.getdbIp(), email, gotJSON['data'])
 		return Response(json.dumps('Sikeres változtatás'), mimetype='application/json')

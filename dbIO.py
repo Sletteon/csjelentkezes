@@ -25,15 +25,20 @@ class dbIO:
 
 		fetchedResp = curs.fetchall()
 		if len(fetchedResp) > 1:
-			return 'Több felhasználónak adataival egyezik meg ez az adat'
+			return None
 		else:
-			return curs.fetchall()
+			return fetchedResp
 
 	def searchAndReturnColumn(self, dbIp, email):
-		try:
-			return self.executeQuery(dbIp, 'SELECT csvLines FROM `jelentkezok` WHERE `csvLines` LIKE "%' + email + '%"')[0]
-		except IndexError:
-			return 'Nincs ilyen adat az adatbázisban'
+		selectQueryResp = self.executeQuery(dbIp, 'SELECT csvLines FROM `jelentkezok` WHERE `csvLines` LIKE "%' + email + '%"')
+
+		if selectQueryResp != None:
+			try:
+				return selectQueryResp[0]
+			except IndexError:
+				return 'Nincs ilyen adat az adatbázisban'
+		else:
+			return 'Több ilyen felhasználónak adatai egyeznek meg a megadott email címmel'
 
 	def updateWithJSON(self, dbIp, email, changeTo):
 		self.executeQuery(dbIp, 'UPDATE `jelentkezok` SET csvLines = "' + changeTo + '" WHERE csvLines LIKE "%' + email + '%"')
