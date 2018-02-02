@@ -30,7 +30,7 @@ class dbIO:
 			return fetchedResp
 
 	def searchAndReturnColumn(self, dbIp, email):
-		selectQueryResp = self.executeQuery(dbIp, 'SELECT csvLines FROM `jelentkezok` WHERE `csvLines` LIKE "%' + email + '%"')
+		selectQueryResp = self.executeQuery(dbIp, 'SELECT csvLines FROM `jelentkezok` WHERE `csvLines` LIKE "%email:' + email + '%"')
 
 		if selectQueryResp != None:
 			try:
